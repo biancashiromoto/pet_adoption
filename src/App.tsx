@@ -2,6 +2,7 @@ import './App.css'
 import { Switch, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import PatientForm from './pages/PatientForm'
+import TutorForm from './pages/TutorForm'
 
 function App() {
 
@@ -12,11 +13,15 @@ function App() {
         <Route
           component={Home}
           exact
-          path="/"
+          path="/home"
         />
         <Route
           component={PatientForm}
           path="/patient"
+        />
+        <Route
+          component={TutorForm}
+          path="/tutor"
         />
       </Switch>
     </div>
