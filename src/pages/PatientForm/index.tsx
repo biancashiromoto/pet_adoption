@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, Prompt } from "react-router-dom"
 
 const PatientForm = () => {
   return (
@@ -32,6 +32,17 @@ const PatientForm = () => {
           </select>
         </label>
       </form>
+      <Prompt
+            message={(location, action) => {
+              if (action === 'POP') {
+                console.log("Backing up...")
+              }
+
+              return location.pathname.startsWith("/app")
+                ? true
+                : `Are you sure you want to go to ${location.pathname}?`
+            }}
+          />
     </div>
   )
 }
