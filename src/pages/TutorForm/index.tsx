@@ -61,8 +61,15 @@ const TutorForm = () => {
         </button>
       </form>
       <Prompt
-        message={"All changes will be lost"}
-        when={hasChanged && isGoingBack}
+        message={(location, action) => {
+          if (action === 'POP') {
+            console.log("Backing up...")
+          }
+
+          return (location.pathname.startsWith("/home") && !hasChanged)
+            ? true
+            : `Are you sure you want to leave? All changes will be lost`
+        }}
       />
     </div>
   )
