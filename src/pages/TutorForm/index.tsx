@@ -35,6 +35,7 @@ const TutorForm = () => {
         >
           First name: 
           <input
+            data-testid="tutor__input--first-name"
             onChange={() => setHasChanged(true)}
             required
             title='tutor__input--first-name'
@@ -46,6 +47,7 @@ const TutorForm = () => {
         >
           Last name: 
           <input
+            data-testid="tutor__input--last-name"
             onChange={() => setHasChanged(true)}
             title='tutor__input--last-name'
             type='text'
