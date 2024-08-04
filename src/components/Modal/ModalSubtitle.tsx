@@ -1,12 +1,17 @@
 import { ReactElement } from 'react';
 
 interface ModalSubtitleProps {
+  className?: string;
   content: string;
 }
 
-const ModalSubtitle = ({ content }: ModalSubtitleProps): ReactElement => {
+
+const ModalSubtitle = ({
+  className,
+  content,
+}: ModalSubtitleProps): ReactElement => {
   return (
-    <span>{content}</span>
+    <p className={className}>{content}</p>
   )
 }
 

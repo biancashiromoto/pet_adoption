@@ -1,12 +1,16 @@
 import { ReactElement } from 'react';
 
 interface ModalTitleProps {
+  className?: string;
   content: string;
 }
 
-const ModalTitle = ({ content }: ModalTitleProps): ReactElement => {
+const ModalTitle = ({
+  className,
+  content,
+ }: ModalTitleProps): ReactElement => {
   return (
-    <h2>{content}</h2>
+    <h2 className={className}>{content}</h2>
   )
 }
 

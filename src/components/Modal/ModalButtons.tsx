@@ -1,12 +1,18 @@
-import { ReactElement, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 interface ModalButtonsProps {
   children: ReactNode;
+  className?: string;
 }
 
-const ModalButtons = ({ children }: ModalButtonsProps): ReactElement => {
+const ModalButtons = ({
+  children,
+  className,
+}: ModalButtonsProps): ReactNode => {
   return (
-    <div>
+    <div
+      className={className}
+    >
       {children}
     </div>
   )
