@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { useNavigationBlocker } from '../../hooks/useNavigationBlocker';
-import { Modal } from '../../components/Modal';
+import { useState } from "react";
+import { useNavigationBlocker } from "../../hooks/useNavigationBlocker";
+import { Modal } from "../../components/Modal";
+import { useForm } from "../../hooks/useForm";
 
 const TutorForm = () => {
   const [hasChanged, setHasChanged] = useState(false);
@@ -8,8 +9,10 @@ const TutorForm = () => {
     showModal,
     setShowModal,
     handleDirectNavigation,
-    handleCancelNavigation,
   } = useNavigationBlocker(hasChanged);
+  const {
+    handleChange,
+  } = useForm(setHasChanged);
 
   return (
     <div>
@@ -31,26 +34,26 @@ const TutorForm = () => {
       </div>
       <form>
         <label
-          htmlFor='tutor__input--first-name'
+          htmlFor="tutor__input--first-name"
         >
           First name: 
           <input
             data-testid="tutor__input--first-name"
-            onChange={() => setHasChanged(true)}
+            onChange={(e) => handleChange(e)}
             required
-            title='tutor__input--first-name'
-            type='text'
+            title="tutor__input--first-name"
+            type="text"
           />
         </label>
         <label
-          htmlFor='tutor__input--last-name'
+          htmlFor="tutor__input--last-name"
         >
           Last name: 
           <input
             data-testid="tutor__input--last-name"
-            onChange={() => setHasChanged(true)}
-            title='tutor__input--last-name'
-            type='text'
+            onChange={(e) => handleChange(e)}
+            title="tutor__input--last-name"
+            type="text"
           />
         </label>
         <button
@@ -64,13 +67,14 @@ const TutorForm = () => {
         </button>
       </form>
       {showModal && (
-        <Modal.Root dataTestId='tutor__modal'>
-          <Modal.Title content='Are you sure?' />
-          <Modal.Subtitle content='All unsaved information will be lost.' />
-          <Modal.Buttons>
-            <button onClick={() => handleDirectNavigation("/patient")}>Yes, Leave</button>
-            <button onClick={() => handleCancelNavigation()}>Cancel</button>
-          </Modal.Buttons>
+        <Modal.Root dataTestId="tutor__modal">
+          <Modal.Title content="Are you sure?" />
+          <Modal.Subtitle content="All unsaved information will be lost." />
+          <Modal.Buttons
+            hasChanged={hasChanged}
+            className="tutor"
+            lastLocation="/patient"
+          />
         </Modal.Root>
       )}
     </div>

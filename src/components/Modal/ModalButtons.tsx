@@ -1,19 +1,36 @@
 import { ReactNode } from 'react';
+import { useNavigationBlocker } from '../../hooks/useNavigationBlocker';
 
 interface ModalButtonsProps {
-  children: ReactNode;
   className?: string;
+  hasChanged: boolean;
+  lastLocation: string
 }
 
 const ModalButtons = ({
-  children,
-  className,
+  hasChanged,
+  lastLocation
 }: ModalButtonsProps): ReactNode => {
+  const {
+    handleDirectNavigation,
+    handleCancelNavigation,
+  } = useNavigationBlocker(hasChanged);
   return (
     <div
-      className={className}
+      className={`modal--buttons`}
     >
-      {children}
+      <button
+        onClick={() => handleDirectNavigation(lastLocation)}
+        type='button'
+      >
+        Yes, Leave
+      </button>
+      <button
+        onClick={() => handleCancelNavigation()}
+        type='button'
+      >
+        Cancel
+      </button>
     </div>
   )
 }

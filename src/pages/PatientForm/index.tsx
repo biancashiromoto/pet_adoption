@@ -16,8 +16,7 @@ const PatientForm = () => {
   ]
   const {
     showModal,
-    setShowModal, 
-    handleCancelNavigation,
+    setShowModal,
     handleDirectNavigation,
   } = useNavigationBlocker(hasChanged);
   const {
@@ -71,10 +70,11 @@ const PatientForm = () => {
         <Modal.Root className="patient__modal" data-testid="patient__modal">
         <Modal.Title content='Are you sure?' />
         <Modal.Subtitle content='All unsaved information will be lost.' />
-        <Modal.Buttons>
-          <button onClick={() => handleDirectNavigation("/")}>Yes, Leave</button>
-          <button onClick={() => handleCancelNavigation()}>Cancel</button>
-        </Modal.Buttons>
+        <Modal.Buttons
+            hasChanged={hasChanged}
+            className="patient"
+            lastLocation="/"
+          />
       </Modal.Root>
       )}
     </div>
