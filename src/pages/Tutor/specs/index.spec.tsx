@@ -40,7 +40,7 @@ describe("TutorForm page", () => {
   })
   it("should be correctly rendered", () => {
     expect(screen.getByRole("heading").innerHTML).toMatch(en.tutor.title);
-    expect(screen.getByRole("paragraph").innerHTML).toMatch(en.tutor.subtitle);
+    expect(screen.getAllByRole("paragraph").some(paragraph => paragraph.innerHTML.includes(en.tutor.subtitle))).toBeTruthy();
     expect(screen.getAllByRole("button")[0].innerHTML).toMatch(en.buttonLabels.goBack);
     expect(screen.getAllByRole("button")[1].innerHTML).toMatch(en.buttonLabels.save);
   });
