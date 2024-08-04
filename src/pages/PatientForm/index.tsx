@@ -1,25 +1,33 @@
 import { useState } from "react";
-import { Prompt, useHistory } from "react-router-dom"
+import { useNavigationBlocker } from "../../hooks/useNavigationBlocker";
 
 const PatientForm = () => {
   const [hasChanged, setHasChanged] = useState(false);
-  const history = useHistory();
+  const {
+    showModal,
+    setShowModal,
+    handleCancelNavigation,
+    handleDirectNavigation,
+  } = useNavigationBlocker(hasChanged);
+
   return (
     <div>
       <h2>PatientForm</h2>
       <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            history.push("/home");
-          }}
-        >
-          Home
-        </button>
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          if (hasChanged) {
+            setShowModal(true);
+          } else {
+            handleDirectNavigation("/home");
+          }
+        }}
+      >
+        Home
+      </button>
       <form>
-        <label
-          htmlFor='patient__input--name'
-        >
+        <label htmlFor='patient__input--name'>
           Name: 
           <input
             onChange={() => setHasChanged(true)}
@@ -27,9 +35,7 @@ const PatientForm = () => {
             type='text'
           />
         </label>
-        <label
-          htmlFor='patient__input--species'
-        >
+        <label htmlFor='patient__input--species'>
           Species: 
           <select
             onChange={() => setHasChanged(true)}
@@ -43,28 +49,24 @@ const PatientForm = () => {
           </select>
         </label>
         <button
-          type="submit"
+          type="button"
           onClick={(e) => {
             e.preventDefault();
-            history.push("/tutor");
+            handleDirectNavigation("/tutor");
           }}
         >
           Save and go to tutor form
         </button>
       </form>
-      <Prompt
-        message={(location, action) => {
-          if (action === 'POP') {
-            console.log("Backing up...")
-          }
-
-          return ((location.pathname.startsWith("/tutor") && hasChanged) || (location.pathname.startsWith("/home") && !hasChanged))
-            ? true
-            : `Are you sure you want to leave? All changes will be lost`
-        }}
-      />
+      {showModal && (
+        <div>
+          <h1>Are you sure you want to leave? All changes will be lost</h1>
+          <button onClick={() => handleDirectNavigation("/tutor")}>Yes, Leave</button>
+          <button onClick={() => handleCancelNavigation()}>Cancel</button>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default PatientForm
+export default PatientForm;
