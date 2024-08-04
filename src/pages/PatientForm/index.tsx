@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useNavigationBlocker } from "../../hooks/useNavigationBlocker";
 import { Modal } from "../../components/Modal";
 import Select from "../../components/Select";
+import { useForm } from "../../hooks/useForm";
 
 const PatientForm = () => {
   const [hasChanged, setHasChanged] = useState(false);
   const species: string[] = [
+    "",
     "Canine",
     "Feline",
     "Bird",
@@ -14,10 +16,13 @@ const PatientForm = () => {
   ]
   const {
     showModal,
-    setShowModal,
+    setShowModal, 
     handleCancelNavigation,
     handleDirectNavigation,
   } = useNavigationBlocker(hasChanged);
+  const {
+    handleChange,
+  } = useForm(setHasChanged);
 
   return (
     <div>
@@ -49,6 +54,7 @@ const PatientForm = () => {
           dataTestId="patient__select--species"
           label="Species: "
           title="patient__select--species"
+          onChange={(e) => handleChange(e)}
           options={species}
         />
         <button

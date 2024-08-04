@@ -92,7 +92,7 @@ describe("PatientForm page", () => {
       </MemoryRouter>
     );
 
-    act(() => fireEvent.change(getByTestId("patient__input--species"), { target: { value: /feline/i } }));
+    act(() => fireEvent.change(getByTestId("patient__select--species"), { target: { value: /feline/i } }));
     act(() => fireEvent.click(getByRole("button", { name: /home/i })));
     await waitFor(() => {
       expect(queryByRole("heading", { name: /are you sure/i })).toBeInTheDocument();
@@ -106,7 +106,7 @@ describe("PatientForm page", () => {
       </MemoryRouter>
     );
 
-    act(() => fireEvent.change(getByTestId("patient__input--species"), { target: { value: "feline" } }));
+    act(() => fireEvent.change(getByTestId("patient__select--species"), { target: { value: "feline" } }));
     act(() => fireEvent.click(getByRole("button", { name: /home/i })));
     await waitFor(() => {
       expect(queryByRole("heading", { name: /are you sure/i })).toBeInTheDocument();
