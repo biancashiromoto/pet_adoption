@@ -7,7 +7,7 @@ const Home = () => {
       <Link
         to="/patient"
       >
-        Patient
+        Register new patient
       </Link>
     </div>
   )
