@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigationBlocker } from "../../hooks/useNavigationBlocker";
+import { Modal } from "../../components/Modal";
 
 const PatientForm = () => {
   const [hasChanged, setHasChanged] = useState(false);
@@ -59,11 +60,14 @@ const PatientForm = () => {
         </button>
       </form>
       {showModal && (
-        <div>
-          <h1>Are you sure you want to leave? All changes will be lost</h1>
+        <Modal.Root>
+        <Modal.Title content='Are you sure?' />
+        <Modal.Subtitle content='All unsaved information will be lost.' />
+        <Modal.Buttons>
           <button onClick={() => handleDirectNavigation("/tutor")}>Yes, Leave</button>
           <button onClick={() => handleCancelNavigation()}>Cancel</button>
-        </div>
+        </Modal.Buttons>
+      </Modal.Root>
       )}
     </div>
   );

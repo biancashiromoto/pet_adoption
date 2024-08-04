@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useNavigationBlocker } from '../../hooks/useNavigationBlocker';
+import { Modal } from '../../components/Modal';
 
 const TutorForm = () => {
   const [hasChanged, setHasChanged] = useState(false);
   const {
     showModal,
     setShowModal,
-    handleCancelNavigation,
     handleDirectNavigation,
+    handleCancelNavigation,
   } = useNavigationBlocker(hasChanged);
 
   return (
@@ -61,11 +62,14 @@ const TutorForm = () => {
         </button>
       </form>
       {showModal && (
-        <div>
-          <h1>Are you sure you want to leave? All changes will be lost</h1>
-          <button onClick={() => handleDirectNavigation("/home")}>Yes, Leave</button>
-          <button onClick={() => handleCancelNavigation()}>Cancel</button>
-        </div>
+        <Modal.Root>
+          <Modal.Title content='Are you sure?' />
+          <Modal.Subtitle content='All unsaved information will be lost.' />
+          <Modal.Buttons>
+            <button onClick={() => handleDirectNavigation("/patient")}>Yes, Leave</button>
+            <button onClick={() => handleCancelNavigation()}>Cancel</button>
+          </Modal.Buttons>
+        </Modal.Root>
       )}
     </div>
   )
