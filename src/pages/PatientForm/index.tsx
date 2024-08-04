@@ -64,7 +64,7 @@ const PatientForm = () => {
         <Modal.Title content='Are you sure?' />
         <Modal.Subtitle content='All unsaved information will be lost.' />
         <Modal.Buttons>
-          <button onClick={() => handleDirectNavigation("/tutor")}>Yes, Leave</button>
+          <button onClick={() => handleDirectNavigation("/home")}>Yes, Leave</button>
           <button onClick={() => handleCancelNavigation()}>Cancel</button>
         </Modal.Buttons>
       </Modal.Root>
