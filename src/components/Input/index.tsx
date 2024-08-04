@@ -5,6 +5,7 @@ interface InputProps {
   className: string;
   dataTestId: string;
   label: string;
+  name: string;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   title: string;
   value: string;
@@ -14,6 +15,7 @@ const Input = ({
   className,
   dataTestId,
   label,
+  name,
   onChange,
   title,
   value
@@ -22,6 +24,7 @@ const Input = ({
     <label className={`${className} input`} data-testid={dataTestId}>
       {label}
       <ShadCnInput
+        name={name}
         onChange={onChange}
         title={title}
         type="text"

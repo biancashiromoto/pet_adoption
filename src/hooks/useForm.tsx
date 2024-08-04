@@ -37,7 +37,7 @@ export const useForm = (setHasChanged: React.Dispatch<React.SetStateAction<boole
       ...prevState,
       pet: {
         ...prevState.pet,
-        [name]: value !== "" && value,
+        [name]: value,
       },
     }));
 

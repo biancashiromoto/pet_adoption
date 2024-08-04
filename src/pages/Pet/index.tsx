@@ -45,6 +45,7 @@ const Pet = () => {
           className="pet__input--name"
           dataTestId="pet__input--name"
           label={en.pet.name}
+          name="name"
           title="pet__input--name"
           onChange={(e) => handleChange(e)}
           value={form.pet.name}
