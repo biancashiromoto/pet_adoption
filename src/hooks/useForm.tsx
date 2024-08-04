@@ -2,9 +2,9 @@ import { ChangeEvent, useState } from "react";
 
 // Define the structure of the form state using an interface
 interface FormProps {
-  patient: {
+  pet: {
     name: string;
-    species: "" | "Canine" | "Feline" | "Bird" | "Rodent" | "Reptile";
+    species: "" | "Canine" | "Feline";
   },
   tutor: {
     firstName: string;
@@ -16,7 +16,7 @@ interface FormProps {
 export const useForm = (setHasChanged: React.Dispatch<React.SetStateAction<boolean>>) => {
   // Initialize form state with default values
   const [form, setForm] = useState<FormProps>({
-    patient: {
+    pet: {
       name: "",
       species: ""
     },
@@ -35,8 +35,8 @@ export const useForm = (setHasChanged: React.Dispatch<React.SetStateAction<boole
     // Update form state by setting the appropriate value
     setForm((prevState) => ({
       ...prevState,
-      patient: {
-        ...prevState.patient,
+      pet: {
+        ...prevState.pet,
         [name]: value !== "" && value,
       },
     }));
