@@ -4,6 +4,7 @@ import { Modal } from "../../components/Modal";
 import Select from "../../components/Select";
 import { useForm } from "../../hooks/useForm";
 import { en } from "../../helpers/en";
+import Input from "../../components/Input";
 
 const Pet = () => {
   const [hasChanged, setHasChanged] = useState(false);
@@ -11,9 +12,6 @@ const Pet = () => {
     "",
     "Canine",
     "Feline",
-    "Bird",
-    "Rodent",
-    "Reptile"
   ]
   const {
     showModal,
@@ -22,6 +20,7 @@ const Pet = () => {
     handleDirectNavigation,
   } = useNavigationBlocker(hasChanged);
   const {
+    form,
     handleChange,
   } = useForm(setHasChanged);
 
@@ -42,19 +41,18 @@ const Pet = () => {
         {en.buttonLabels.goBack}
       </button>
       <form>
-        <label htmlFor='patient__input--name'>
-          {en.pet.name}
-          <input
-            data-testid="patient__input--name"
-            onChange={() => setHasChanged(true)}
-            title='patient__input--name'
-            type='text'
-          />
-        </label>
+        <Input
+          className="pet__input--name"
+          dataTestId="pet__input--name"
+          label={en.pet.name}
+          title="pet__input--name"
+          onChange={(e) => handleChange(e)}
+          value={form.pet.name}
+        />
         <Select
-          dataTestId="patient__select--species"
+          dataTestId="pet__select--species"
           label={en.pet.species}
-          title="patient__select--species"
+          title="pet__select--species"
           onChange={(e) => handleChange(e)}
           options={species}
         />
@@ -70,8 +68,8 @@ const Pet = () => {
       </form>
       {showModal && (
         <Modal.Root
-          className="patient__modal"
-          data-testid="patient__modal"
+          className="pet__modal"
+          data-testid="pet__modal"
         >
         <Modal.Title content={en.modal.leaveWithoutSaving.title} />
         <Modal.Subtitle content={en.modal.leaveWithoutSaving.subtitle} />

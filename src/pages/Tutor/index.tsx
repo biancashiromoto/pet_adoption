@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { useNavigationBlocker } from '../../hooks/useNavigationBlocker';
-import { Modal } from '../../components/Modal';
-import { en } from '../../helpers/en';
+import { useState } from "react";
+import { useForm, useNavigationBlocker } from "../../hooks/index";
+import { Modal } from "../../components/Modal";
+import { en } from "../../helpers/en";
+import Input from "../../components/Input";
 
 const Tutor = () => {
   const [hasChanged, setHasChanged] = useState(false);
@@ -11,6 +12,10 @@ const Tutor = () => {
     handleDirectNavigation,
     handleCancelNavigation,
   } = useNavigationBlocker(hasChanged);
+  const {
+    form,
+    handleChange,
+  } = useForm(setHasChanged);
 
   return (
     <div>
@@ -32,29 +37,22 @@ const Tutor = () => {
         </button>
       </div>
       <form>
-        <label
-          htmlFor='tutor__input--first-name'
-        >
-          First name: 
-          <input
-            data-testid="tutor__input--first-name"
-            onChange={() => setHasChanged(true)}
-            required
-            title='tutor__input--first-name'
-            type='text'
-          />
-        </label>
-        <label
-          htmlFor='tutor__input--last-name'
-        >
-          Last name: 
-          <input
-            data-testid="tutor__input--last-name"
-            onChange={() => setHasChanged(true)}
-            title='tutor__input--last-name'
-            type='text'
-          />
-        </label>
+        <Input
+          className="tutor__input--first-name"
+          dataTestId="tutor__input--first-name"
+          label={en.tutor.firstName}
+          onChange={(e) => handleChange(e)}
+          title="tutor__input--first-name"
+          value={form.tutor.firstName}
+        />
+        <Input
+          className="tutor__input--last-name"
+          dataTestId="tutor__input--last-name"
+          label={en.tutor.lastName}
+          onChange={(e) => handleChange(e)}
+          title="tutor__input--last-name"
+          value={form.tutor.lastName}
+        />
         <button
           type="submit"
           onClick={(e) => {
@@ -66,7 +64,7 @@ const Tutor = () => {
         </button>
       </form>
       {showModal && (
-        <Modal.Root dataTestId='tutor__modal'>
+        <Modal.Root dataTestId="tutor__modal">
           <Modal.Title content={en.modal.leaveWithoutSaving.title} />
           <Modal.Subtitle content={en.modal.leaveWithoutSaving.subtitle} />
           <Modal.Buttons
