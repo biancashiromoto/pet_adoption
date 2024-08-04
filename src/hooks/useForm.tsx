@@ -31,13 +31,15 @@ export const useForm = (setHasChanged: React.Dispatch<React.SetStateAction<boole
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
+    const section = name.split(".")[0]; // e.g., "pet" or "tutor"
+    const field = name.split(".")[1]; // e.g., "name" or "firstName"
 
     // Update form state by setting the appropriate value
     setForm((prevState) => ({
       ...prevState,
-      pet: {
-        ...prevState.pet,
-        [name]: value,
+      [section]: {
+        ...prevState[section as keyof FormProps],
+        [field]: value,
       },
     }));
 

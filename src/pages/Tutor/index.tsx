@@ -41,6 +41,7 @@ const Tutor = () => {
           className="tutor__input--first-name"
           dataTestId="tutor__input--first-name"
           label={en.tutor.firstName}
+          name="tutor.firstName"
           onChange={(e) => handleChange(e)}
           title="tutor__input--first-name"
           value={form.tutor.firstName}
@@ -49,6 +50,7 @@ const Tutor = () => {
           className="tutor__input--last-name"
           dataTestId="tutor__input--last-name"
           label={en.tutor.lastName}
+           name="tutor.lastName"
           onChange={(e) => handleChange(e)}
           title="tutor__input--last-name"
           value={form.tutor.lastName}
