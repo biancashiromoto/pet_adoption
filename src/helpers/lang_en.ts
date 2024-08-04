@@ -1,4 +1,4 @@
-export const ptBt = {
+export const en = {
   buttonsActions: {
     cancel: "Cancel",
     home: "Home",
