@@ -26,7 +26,9 @@ export const en = {
   },
   tutor: {
     title: "Tutor",
-    subtitle: "Fill this form if you are interested in adopting a pet."
+    subtitle: "Fill this form if you are interested in adopting a pet.",
+    firstName: "First name: ",
+    lastName: "Last name: ",
   },
   app: {
     title: "Pet adoption"
