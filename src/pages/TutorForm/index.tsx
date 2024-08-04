@@ -62,7 +62,7 @@ const TutorForm = () => {
         </button>
       </form>
       {showModal && (
-        <Modal.Root>
+        <Modal.Root dataTestId='tutor__modal'>
           <Modal.Title content='Are you sure?' />
           <Modal.Subtitle content='All unsaved information will be lost.' />
           <Modal.Buttons>
