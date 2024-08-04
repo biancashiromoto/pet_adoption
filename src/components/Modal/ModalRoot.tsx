@@ -13,7 +13,7 @@ const ModalRoot = ({
 }: ModalRootProps): ReactElement => {
   return (
     <div
-      className={className}
+      className={`${className} modal`}
       data-testid={dataTestId}
     >
       {children}
