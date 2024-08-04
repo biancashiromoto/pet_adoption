@@ -63,7 +63,7 @@ describe("TutorForm page", () => {
     );
 
     act(() => fireEvent.click(getByRole("button", { name: /Save and go back to home/i })));
-    expect(mockHistoryPush).toHaveBeenCalledWith("/home");
+    expect(mockHistoryPush).toHaveBeenCalledWith("/");
   });
 
   it("should show modal after click on Patient button if name input is changed", async () => {

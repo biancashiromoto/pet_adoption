@@ -57,7 +57,7 @@ const TutorForm = () => {
           type="submit"
           onClick={(e) => {
             e.preventDefault();
-            handleDirectNavigation("/home");
+            handleDirectNavigation("/");
           }}
         >
           Save and go back to home

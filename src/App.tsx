@@ -13,7 +13,7 @@ function App() {
         <Route
           component={Home}
           exact
-          path="/home"
+          path="/"
         />
         <Route
           component={PatientForm}

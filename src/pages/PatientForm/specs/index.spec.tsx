@@ -31,7 +31,8 @@ describe("PatientForm page", () => {
   beforeEach(() => {
     cleanup();
     vi.clearAllMocks();
-  })
+  });
+  
   it("should be correctly rendered", () => {
     const { getAllByRole, getByRole } = render(
       <MemoryRouter>
@@ -52,7 +53,7 @@ describe("PatientForm page", () => {
     );
 
     act(() => fireEvent.click(getByRole("button", { name: /home/i })));
-    expect(mockHistoryPush).toHaveBeenCalledWith("/home");
+    expect(mockHistoryPush).toHaveBeenCalledWith("/");
   });
 
   it("should correctly handle click on 'Save and go to tutor form' button", () => {
@@ -80,7 +81,7 @@ describe("PatientForm page", () => {
     });
     act(() => fireEvent.click(getByRole("button", { name: /yes, leave/i })));
     await waitFor(() => {
-      expect(mockHistoryPush).toHaveBeenCalledWith("/home");
+      expect(mockHistoryPush).toHaveBeenCalledWith("/");
     });
   });
 
