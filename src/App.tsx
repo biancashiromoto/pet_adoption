@@ -1,14 +1,15 @@
 import './App.css'
 import { Switch, Route } from 'react-router-dom'
 import Home from './pages/Home'
-import PatientForm from './pages/PatientForm'
-import TutorForm from './pages/TutorForm'
+import Pet from './pages/Pet'
+import Tutor from './pages/Tutor'
+import { en } from './helpers/en'
 
 function App() {
 
   return (
     <div>
-      <h1>Vet form</h1>
+      <h1>{en.app.title}</h1>
       <Switch>
         <Route
           component={Home}
@@ -16,11 +17,11 @@ function App() {
           path="/"
         />
         <Route
-          component={PatientForm}
-          path="/patient"
+          component={Pet}
+          path="/pet"
         />
         <Route
-          component={TutorForm}
+          component={Tutor}
           path="/tutor"
         />
       </Switch>

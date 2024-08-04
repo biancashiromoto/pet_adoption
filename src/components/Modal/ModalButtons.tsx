@@ -1,19 +1,31 @@
 import { ReactNode } from 'react';
+import { en } from '../../helpers/en';
 
 interface ModalButtonsProps {
-  children: ReactNode;
-  className?: string;
+  handleDirectNavigation: (path: string) => void;
+  handleCancelNavigation: () => void;
+  previousLocation: string;
 }
 
 const ModalButtons = ({
-  children,
-  className,
+  handleDirectNavigation,
+  handleCancelNavigation,
+  previousLocation
 }: ModalButtonsProps): ReactNode => {
   return (
-    <div
-      className={className}
-    >
-      {children}
+    <div>
+      <button
+        onClick={() => handleDirectNavigation(previousLocation)}
+        type='button'
+      >
+        {en.buttonLabels.leave}
+      </button>
+      <button
+        onClick={() => handleCancelNavigation()}
+        type='button'
+      >
+        {en.buttonLabels.cancel}
+      </button>
     </div>
   )
 }
