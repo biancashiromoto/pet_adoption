@@ -24,7 +24,7 @@ const Tutor = () => {
             if (hasChanged) {
               setShowModal(true);
             } else {
-              handleDirectNavigation("/pet");
+              handleDirectNavigation("/");
             }
           }}
         >
@@ -72,7 +72,7 @@ const Tutor = () => {
           <Modal.Buttons
             handleCancelNavigation={handleCancelNavigation}
             handleDirectNavigation={handleDirectNavigation}
-            previousLocation="/pet"
+            previousLocation="/"
           />
         </Modal.Root>
       )}

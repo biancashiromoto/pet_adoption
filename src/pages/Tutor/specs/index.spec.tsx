@@ -54,7 +54,7 @@ describe("TutorForm page", () => {
     );
 
     act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
-    expect(mockHistoryPush).toHaveBeenCalledWith("/pet");
+    expect(mockHistoryPush).toHaveBeenCalledWith("/");
   });
 
   it("should correctly handle click on 'Save and go to tutor form' button", () => {
@@ -82,7 +82,7 @@ describe("TutorForm page", () => {
     });
     act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.leave })));
     await waitFor(() => {
-      expect(mockHistoryPush).toHaveBeenCalledWith("/pet");
+      expect(mockHistoryPush).toHaveBeenCalledWith("/");
     });
   });
 
