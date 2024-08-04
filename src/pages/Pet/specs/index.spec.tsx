@@ -1,4 +1,4 @@
-import { act, cleanup, fireEvent, render, waitFor } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import Pet from "../index";
 import { MemoryRouter } from "react-router-dom";
@@ -32,87 +32,56 @@ describe("Pet page", () => {
   beforeEach(() => {
     cleanup();
     vi.clearAllMocks();
+    render(
+      <MemoryRouter>
+        <Pet />
+      </MemoryRouter>
+    )
   });
   
   it("should be correctly rendered", () => {
-    const { getAllByRole, getByRole } = render(
-      <MemoryRouter>
-        <Pet />
-      </MemoryRouter>
-    );
-
-    expect(getByRole("heading").innerHTML).toMatch(en.pet.pageTitle);
-    expect(getAllByRole("button")[0].innerHTML).toMatch(en.buttonLabels.goBack);
-    expect(getAllByRole("button")[1].innerHTML).toMatch(en.buttonLabels.save);
+    expect(screen.getByRole("heading").innerHTML).toMatch(en.pet.pageTitle);
+    expect(screen.getAllByRole("button")[0].innerHTML).toMatch(en.buttonLabels.goBack);
+    expect(screen.getAllByRole("button")[1].innerHTML).toMatch(en.buttonLabels.save);
   });
 
   it("should correctly handle click on Home button", () => {
-    const { getByRole } = render(
-      <MemoryRouter>
-        <Pet />
-      </MemoryRouter>
-    );
-
-    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
+    act(() => fireEvent.click(screen.getByRole("button", { name: en.buttonLabels.goBack })));
     expect(mockHistoryPush).toHaveBeenCalledWith("/");
   });
 
   it("should correctly handle click on 'Save' button", () => {
-    const { getByRole } = render(
-      <MemoryRouter>
-        <Pet />
-      </MemoryRouter>
-    );
-
-    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.save })));
+    act(() => fireEvent.click(screen.getByRole("button", { name: en.buttonLabels.save })));
     expect(mockHistoryPush).toHaveBeenCalledWith("/");
   });
 
   it("should show modal after click on Home button if name input is changed", async () => {
-    const { getByRole, getByTestId, queryByRole } = render(
-      <MemoryRouter>
-        <Pet />
-      </MemoryRouter>
-    );
-
-    act(() => fireEvent.change(getByTestId("patient__input--name"), { target: { value: "Francisco" } }));
-    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
+    act(() => fireEvent.change(screen.getByTestId("pet__input--name").children[0], { target: { value: "Francisco" } }));
+    act(() => fireEvent.click(screen.getByRole("button", { name: en.buttonLabels.goBack })));
     await waitFor(() => {
-      expect(queryByRole("heading", { name: en.modal.leaveWithoutSaving.title })).toBeInTheDocument();
+      expect(screen.queryByRole("heading", { name: en.modal.leaveWithoutSaving.title })).toBeInTheDocument();
     });
-    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.leave })));
+    act(() => fireEvent.click(screen.getByRole("button", { name: en.buttonLabels.leave })));
     await waitFor(() => {
       expect(mockHistoryPush).toHaveBeenCalledWith("/");
     });
   });
 
   it("should show modal after click on Home button if species select is changed", async () => {
-    const { getByRole, getByTestId, queryByRole } = render(
-      <MemoryRouter>
-        <Pet />
-      </MemoryRouter>
-    );
-
-    act(() => fireEvent.change(getByTestId("patient__select--species"), { target: { value: /feline/i } }));
-    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
+    act(() => fireEvent.change(screen.getByTestId("pet__select--species"), { target: { value: /feline/i } }));
+    act(() => fireEvent.click(screen.getByRole("button", { name: en.buttonLabels.goBack })));
     await waitFor(() => {
-      expect(queryByRole("heading", { name: en.modal.leaveWithoutSaving.title })).toBeInTheDocument();
+      expect(screen.queryByRole("heading", { name: en.modal.leaveWithoutSaving.title })).toBeInTheDocument();
     });
   });
 
   it("should correctly handle click on modal's cancel button", async () => {
-    const { getByRole, getByTestId, queryByRole } = render(
-      <MemoryRouter>
-        <Pet />
-      </MemoryRouter>
-    );
-
-    act(() => fireEvent.change(getByTestId("patient__select--species"), { target: { value: "feline" } }));
-    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
+    act(() => fireEvent.change(screen.getByTestId("pet__select--species"), { target: { value: "feline" } }));
+    act(() => fireEvent.click(screen.getByRole("button", { name: en.buttonLabels.goBack })));
     await waitFor(() => {
-      expect(queryByRole("heading", { name: en.modal.leaveWithoutSaving.title })).toBeInTheDocument();
+      expect(screen.queryByRole("heading", { name: en.modal.leaveWithoutSaving.title })).toBeInTheDocument();
     });
-    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.cancel })));
+    act(() => fireEvent.click(screen.getByRole("button", { name: en.buttonLabels.cancel })));
     expect(mockHistoryPush).not.toHaveBeenCalled();
   });
 });
