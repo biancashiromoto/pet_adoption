@@ -5,6 +5,7 @@ import Select from "../../components/Select";
 import { useForm } from "../../hooks/useForm";
 import { en } from "../../helpers/en";
 import Input from "../../components/Input";
+import { Button } from "../../components/Button";
 
 const Pet = () => {
   const [hasChanged, setHasChanged] = useState(false);
@@ -27,10 +28,10 @@ const Pet = () => {
   return (
     <div>
       <h2>{en.pet.pageTitle}</h2>
-      <button
+      <Button.Root
+        className="pet__button--go-back"
         type="button"
-        onClick={(e) => {
-          e.preventDefault();
+        onClick={() => {
           if (hasChanged) {
             setShowModal(true);
           } else {
@@ -38,8 +39,8 @@ const Pet = () => {
           }
         }}
       >
-        {en.buttonLabels.goBack}
-      </button>
+        <Button.Label content={en.buttonLabels.goBack} />
+      </Button.Root>
       <form>
         <Input
           className="pet__input--name"
@@ -57,15 +58,15 @@ const Pet = () => {
           onChange={(e) => handleChange(e)}
           options={species}
         />
-        <button
+        <Button.Root
+          className="pet__button--save"
           type="submit"
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={() => {
             handleDirectNavigation("/");
           }}
         >
-          {en.buttonLabels.save}
-        </button>
+          <Button.Label content={en.buttonLabels.save} />
+        </Button.Root>
       </form>
       {showModal && (
         <Modal.Root

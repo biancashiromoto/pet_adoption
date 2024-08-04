@@ -3,6 +3,7 @@ import { useForm, useNavigationBlocker } from "../../hooks/index";
 import { Modal } from "../../components/Modal";
 import { en } from "../../helpers/en";
 import Input from "../../components/Input";
+import { Button } from "../../components/Button";
 
 const Tutor = () => {
   const [hasChanged, setHasChanged] = useState(false);
@@ -22,10 +23,10 @@ const Tutor = () => {
       <h1>{en.tutor.title}</h1>
       <p>{en.tutor.subtitle}</p>
       <div>
-        <button
+        <Button.Root
+          className="pet__button--go-back"
           type="button"
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={() => {
             if (hasChanged) {
               setShowModal(true);
             } else {
@@ -33,8 +34,8 @@ const Tutor = () => {
             }
           }}
         >
-          {en.buttonLabels.goBack}
-        </button>
+          <Button.Label content={en.buttonLabels.goBack} />
+        </Button.Root>
       </div>
       <form>
         <Input
@@ -55,15 +56,15 @@ const Tutor = () => {
           title="tutor__input--last-name"
           value={form.tutor.lastName}
         />
-        <button
+        <Button.Root
+          className="pet__button--save"
           type="submit"
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={() => {
             handleDirectNavigation("/");
           }}
         >
-          {en.buttonLabels.save}
-        </button>
+          <Button.Label content={en.buttonLabels.save} />
+      </Button.Root>
       </form>
       {showModal && (
         <Modal.Root dataTestId="tutor__modal">
