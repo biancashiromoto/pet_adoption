@@ -71,10 +71,11 @@ const PatientForm = () => {
         <Modal.Root className="patient__modal" data-testid="patient__modal">
         <Modal.Title content='Are you sure?' />
         <Modal.Subtitle content='All unsaved information will be lost.' />
-        <Modal.Buttons>
-          <button onClick={() => handleDirectNavigation("/")}>Yes, Leave</button>
-          <button onClick={() => handleCancelNavigation()}>Cancel</button>
-        </Modal.Buttons>
+        <Modal.Buttons
+          handleCancelNavigation={handleCancelNavigation}
+          handleDirectNavigation={handleDirectNavigation}
+          previousLocation="/"
+        />
       </Modal.Root>
       )}
     </div>

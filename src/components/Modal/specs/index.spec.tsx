@@ -9,10 +9,11 @@ describe("Modal component", () => {
       <Modal.Root data-testid="data-testid">
         <Modal.Title content="title" />
         <Modal.Subtitle content="subtitle" />
-        <Modal.Buttons>
-          <button onClick={vi.fn()}>Yes, Leave</button>
-          <button onClick={vi.fn()}>Cancel</button>
-        </Modal.Buttons>
+        <Modal.Buttons
+          handleCancelNavigation={vi.fn()}
+          handleDirectNavigation={vi.fn()}
+          previousLocation="/"
+        />
       </Modal.Root>
     );
 
@@ -28,10 +29,11 @@ describe("Modal component", () => {
     const { getAllByRole } = render(
       <Modal.Root data-testid="data-testid">
         <Modal.Title content="title" />
-        <Modal.Buttons>
-          <button onClick={onClickAgreeMock}>Yes, Leave</button>
-          <button onClick={vi.fn()}>Cancel</button>
-        </Modal.Buttons>
+        <Modal.Buttons
+          handleCancelNavigation={vi.fn()}
+          handleDirectNavigation={onClickAgreeMock}
+          previousLocation="/"
+        />
       </Modal.Root>
     );
     act(() => fireEvent.click(getAllByRole('button')[0]));
@@ -43,10 +45,11 @@ describe("Modal component", () => {
     const { getAllByRole } = render(
       <Modal.Root data-testid="data-testid">
         <Modal.Title content="title" />
-        <Modal.Buttons>
-          <button onClick={vi.fn()}>Yes, Leave</button>
-          <button onClick={onClickCancelMock}>Cancel</button>
-        </Modal.Buttons>
+        <Modal.Buttons
+          handleCancelNavigation={onClickCancelMock}
+          handleDirectNavigation={vi.fn()}
+          previousLocation="/"
+        />
       </Modal.Root>
     );
     act(() => fireEvent.click(getAllByRole('button')[1]));

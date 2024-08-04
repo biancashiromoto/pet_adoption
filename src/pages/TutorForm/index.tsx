@@ -67,10 +67,11 @@ const TutorForm = () => {
         <Modal.Root dataTestId='tutor__modal'>
           <Modal.Title content='Are you sure?' />
           <Modal.Subtitle content='All unsaved information will be lost.' />
-          <Modal.Buttons>
-            <button onClick={() => handleDirectNavigation("/patient")}>Yes, Leave</button>
-            <button onClick={() => handleCancelNavigation()}>Cancel</button>
-          </Modal.Buttons>
+          <Modal.Buttons
+            handleCancelNavigation={handleCancelNavigation}
+            handleDirectNavigation={handleDirectNavigation}
+            previousLocation='/patient'
+          />
         </Modal.Root>
       )}
     </div>
