@@ -31,6 +31,7 @@ const PatientForm = () => {
         <label htmlFor='patient__input--name'>
           Name: 
           <input
+            data-testid="patient__input--name"
             onChange={() => setHasChanged(true)}
             title='patient__input--name'
             type='text'
@@ -39,6 +40,7 @@ const PatientForm = () => {
         <label htmlFor='patient__input--species'>
           Species: 
           <select
+            data-testid="patient__input--species"
             onChange={() => setHasChanged(true)}
             title="patient__input--species"
           >
@@ -60,7 +62,7 @@ const PatientForm = () => {
         </button>
       </form>
       {showModal && (
-        <Modal.Root>
+        <Modal.Root className="patient__modal" data-testid="patient__modal">
         <Modal.Title content='Are you sure?' />
         <Modal.Subtitle content='All unsaved information will be lost.' />
         <Modal.Buttons>
