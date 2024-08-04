@@ -1,8 +1,9 @@
 import { act, cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import TutorForm from "../index";
+import Tutor from "../index";
 import { MemoryRouter } from "react-router-dom";
 import '@testing-library/jest-dom';
+import { en } from "../../../helpers/en";
 
 const mockHistoryPush = vi.fn();
 const mockUnblock = vi.fn();
@@ -35,64 +36,65 @@ describe("TutorForm page", () => {
   it("should be correctly rendered", () => {
     const { getAllByRole, getByRole } = render(
       <MemoryRouter>
-        <TutorForm />
+        <Tutor />
       </MemoryRouter>
     );
 
-    expect(getByRole("heading").innerHTML).toMatch(/TutorForm/i);
-    expect(getAllByRole("button")[0].innerHTML).toMatch(/Patient/i);
-    expect(getAllByRole("button")[1].innerHTML).toMatch("Save and go back to home");
+    expect(getByRole("heading").innerHTML).toMatch(en.tutor.title);
+    expect(getByRole("paragraph").innerHTML).toMatch(en.tutor.subtitle);
+    expect(getAllByRole("button")[0].innerHTML).toMatch(en.buttonLabels.goBack);
+    expect(getAllByRole("button")[1].innerHTML).toMatch(en.buttonLabels.save);
   });
 
   it("should correctly handle click on Patient button", () => {
     const { getByRole } = render(
       <MemoryRouter>
-        <TutorForm />
+        <Tutor />
       </MemoryRouter>
     );
 
-    act(() => fireEvent.click(getByRole("button", { name: /patient/i })));
-    expect(mockHistoryPush).toHaveBeenCalledWith("/patient");
+    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
+    expect(mockHistoryPush).toHaveBeenCalledWith("/pet");
   });
 
   it("should correctly handle click on 'Save and go to tutor form' button", () => {
     const { getByRole } = render(
       <MemoryRouter>
-        <TutorForm />
+        <Tutor />
       </MemoryRouter>
     );
 
-    act(() => fireEvent.click(getByRole("button", { name: /Save and go back to home/i })));
+    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.save })));
     expect(mockHistoryPush).toHaveBeenCalledWith("/");
   });
 
   it("should show modal after click on Patient button if name input is changed", async () => {
     const { getByRole, getByTestId, queryByRole } = render(
       <MemoryRouter>
-        <TutorForm />
+        <Tutor />
       </MemoryRouter>
     );
 
     act(() => fireEvent.change(getByTestId("tutor__input--first-name"), { target: { value: "Francisco" } }));
-    act(() => fireEvent.click(getByRole("button", { name: /Patient/i })));
+    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
     await waitFor(() => {
       expect(queryByRole("heading", { name: /are you sure/i })).toBeInTheDocument();
     });
-    act(() => fireEvent.click(getByRole("button", { name: /yes, leave/i })));
+    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.leave })));
     await waitFor(() => {
-      expect(mockHistoryPush).toHaveBeenCalledWith("/patient");
+      expect(mockHistoryPush).toHaveBeenCalledWith("/pet");
     });
   });
 
   it("should show modal after click on Patient button if species select is changed", async () => {
     const { getByRole, getByTestId, queryByRole } = render(
       <MemoryRouter>
-        <TutorForm />
+        <Tutor />
       </MemoryRouter>
     );
 
     act(() => fireEvent.change(getByTestId("tutor__input--first-name"), { target: { value: /jon/i } }));
-    act(() => fireEvent.click(getByRole("button", { name: /patient/i })));
+    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
     await waitFor(() => {
       expect(queryByRole("heading", { name: /are you sure/i })).toBeInTheDocument();
     });
@@ -101,16 +103,16 @@ describe("TutorForm page", () => {
   it("should correctly handle click on modal's cancel button", async () => {
     const { getByRole, getByTestId, queryByRole } = render(
       <MemoryRouter>
-        <TutorForm />
+        <Tutor />
       </MemoryRouter>
     );
 
     act(() => fireEvent.change(getByTestId("tutor__input--last-name"), { target: { value: /doe/i } }));
-    act(() => fireEvent.click(getByRole("button", { name: /patient/i })));
+    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
     await waitFor(() => {
       expect(queryByRole("heading", { name: /are you sure/i })).toBeInTheDocument();
     });
-    act(() => fireEvent.click(getByRole("button", { name: /cancel/i })));
+    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.cancel })));
     expect(mockHistoryPush).not.toHaveBeenCalled();
   });
 });

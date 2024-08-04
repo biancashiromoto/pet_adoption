@@ -1,14 +1,26 @@
 import { Link } from 'react-router-dom'
+import { en } from '../../helpers/en'
 
 const Home = () => {
   return (
     <div>
-      <h1>Home</h1>
-      <Link
-        to="/patient"
-      >
-        Register new patient
-      </Link>
+      <h1>{en.home.title}</h1>
+      <ul>
+        <li>
+          <Link
+            to="/pet"
+          >
+            {en.home.registerNew}
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/tutor"
+          >
+            {en.home.adoptAPet}
+          </Link>
+        </li>
+      </ul>
     </div>
   )
 }

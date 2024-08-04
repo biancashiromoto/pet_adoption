@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { describe, expect } from "vitest";
+import { describe, expect, vi } from "vitest";
 import Select from "..";
 import { MemoryRouter } from "react-router-dom";
 
@@ -19,6 +19,7 @@ describe("Select component" , () => {
           dataTestId="data-testid"
           label="species"
           options={species}
+          onChange={vi.fn()}
           title="title"
         />
       </MemoryRouter>

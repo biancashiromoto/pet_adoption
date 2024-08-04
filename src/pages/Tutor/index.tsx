@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigationBlocker } from '../../hooks/useNavigationBlocker';
 import { Modal } from '../../components/Modal';
+import { en } from '../../helpers/en';
 
-const TutorForm = () => {
+const Tutor = () => {
   const [hasChanged, setHasChanged] = useState(false);
   const {
     showModal,
@@ -13,7 +14,8 @@ const TutorForm = () => {
 
   return (
     <div>
-      <h1>TutorForm</h1>
+      <h1>{en.tutor.title}</h1>
+      <p>{en.tutor.subtitle}</p>
       <div>
         <button
           type="button"
@@ -22,11 +24,11 @@ const TutorForm = () => {
             if (hasChanged) {
               setShowModal(true);
             } else {
-              handleDirectNavigation("/patient");
+              handleDirectNavigation("/pet");
             }
           }}
         >
-          Patient
+          {en.buttonLabels.goBack}
         </button>
       </div>
       <form>
@@ -60,17 +62,17 @@ const TutorForm = () => {
             handleDirectNavigation("/");
           }}
         >
-          Save and go back to home
+          {en.buttonLabels.save}
         </button>
       </form>
       {showModal && (
         <Modal.Root dataTestId='tutor__modal'>
-          <Modal.Title content='Are you sure?' />
-          <Modal.Subtitle content='All unsaved information will be lost.' />
+          <Modal.Title content={en.modal.leaveWithoutSaving.title} />
+          <Modal.Subtitle content={en.modal.leaveWithoutSaving.subtitle} />
           <Modal.Buttons
             handleCancelNavigation={handleCancelNavigation}
             handleDirectNavigation={handleDirectNavigation}
-            previousLocation='/patient'
+            previousLocation="/pet"
           />
         </Modal.Root>
       )}
@@ -78,4 +80,4 @@ const TutorForm = () => {
   )
 }
 
-export default TutorForm
+export default Tutor

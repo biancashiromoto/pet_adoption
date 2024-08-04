@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { en } from '../../helpers/en';
 
 interface ModalButtonsProps {
   handleDirectNavigation: (path: string) => void;
@@ -17,13 +18,13 @@ const ModalButtons = ({
         onClick={() => handleDirectNavigation(previousLocation)}
         type='button'
       >
-        Yes, Leave
+        {en.buttonLabels.leave}
       </button>
       <button
         onClick={() => handleCancelNavigation()}
         type='button'
       >
-        Cancel
+        {en.buttonLabels.cancel}
       </button>
     </div>
   )

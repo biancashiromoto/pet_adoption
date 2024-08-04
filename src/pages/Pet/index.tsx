@@ -3,8 +3,9 @@ import { useNavigationBlocker } from "../../hooks/useNavigationBlocker";
 import { Modal } from "../../components/Modal";
 import Select from "../../components/Select";
 import { useForm } from "../../hooks/useForm";
+import { en } from "../../helpers/en";
 
-const PatientForm = () => {
+const Pet = () => {
   const [hasChanged, setHasChanged] = useState(false);
   const species: string[] = [
     "",
@@ -26,7 +27,7 @@ const PatientForm = () => {
 
   return (
     <div>
-      <h2>PatientForm</h2>
+      <h2>{en.pet.pageTitle}</h2>
       <button
         type="button"
         onClick={(e) => {
@@ -38,11 +39,11 @@ const PatientForm = () => {
           }
         }}
       >
-        Home
+        {en.buttonLabels.goBack}
       </button>
       <form>
         <label htmlFor='patient__input--name'>
-          Name: 
+          {en.pet.name}
           <input
             data-testid="patient__input--name"
             onChange={() => setHasChanged(true)}
@@ -52,25 +53,28 @@ const PatientForm = () => {
         </label>
         <Select
           dataTestId="patient__select--species"
-          label="Species: "
+          label={en.pet.species}
           title="patient__select--species"
           onChange={(e) => handleChange(e)}
           options={species}
         />
         <button
-          type="button"
+          type="submit"
           onClick={(e) => {
             e.preventDefault();
-            handleDirectNavigation("/tutor");
+            handleDirectNavigation("/");
           }}
         >
-          Save and go to tutor form
+          {en.buttonLabels.save}
         </button>
       </form>
       {showModal && (
-        <Modal.Root className="patient__modal" data-testid="patient__modal">
-        <Modal.Title content='Are you sure?' />
-        <Modal.Subtitle content='All unsaved information will be lost.' />
+        <Modal.Root
+          className="patient__modal"
+          data-testid="patient__modal"
+        >
+        <Modal.Title content={en.modal.leaveWithoutSaving.title} />
+        <Modal.Subtitle content={en.modal.leaveWithoutSaving.subtitle} />
         <Modal.Buttons
           handleCancelNavigation={handleCancelNavigation}
           handleDirectNavigation={handleDirectNavigation}
@@ -82,4 +86,4 @@ const PatientForm = () => {
   );
 };
 
-export default PatientForm;
+export default Pet;

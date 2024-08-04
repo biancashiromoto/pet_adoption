@@ -1,6 +1,7 @@
 import { act, cleanup, fireEvent, render } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Modal } from "..";
+import { en } from "../../../helpers/en";
 
 describe("Modal component", () => {
   beforeEach(() => cleanup())
@@ -20,8 +21,8 @@ describe("Modal component", () => {
     expect(getAllByRole('button').length).toEqual(2);
     expect(getByRole('heading').innerHTML).toMatch(/title/i);
     expect(getByRole('paragraph').innerHTML).toMatch(/subtitle/i);
-    expect(getAllByRole('button')[0].innerHTML).toMatch(/yes, leave/i);
-    expect(getAllByRole('button')[1].innerHTML).toMatch(/cancel/i);
+    expect(getAllByRole('button')[0].innerHTML).toMatch(en.buttonLabels.leave);
+    expect(getAllByRole('button')[1].innerHTML).toMatch(en.buttonLabels.cancel);
   });
 
   it("should correctly handle click on agree button", () => {
