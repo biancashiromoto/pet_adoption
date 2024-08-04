@@ -22,7 +22,7 @@ const TutorForm = () => {
             if (hasChanged) {
               setShowModal(true);
             } else {
-              handleDirectNavigation("/home");
+              handleDirectNavigation("/patient");
             }
           }}
         >
