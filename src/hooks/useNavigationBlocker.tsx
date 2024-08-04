@@ -9,10 +9,10 @@ import { useHistory, useLocation } from "react-router-dom";
  * @returns An object containing state and functions to handle navigation and modal.
  */
 export const useNavigationBlocker = (hasChanged: boolean) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [nextPath, setNextPath] = useState<string | null>(null);
-  const history = useHistory();
-  const location = useLocation();
+  const history = useHistory<History>();
+  const location = useLocation<Location>();
 
   useEffect(() => {
     /**
@@ -23,7 +23,8 @@ export const useNavigationBlocker = (hasChanged: boolean) => {
      * @param nextLocation - The location object of the attempted navigation.
      * @returns `false` to prevent navigation or `true` to allow it.
      */
-    const unblock = history.block((nextLocation) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const unblock = history.block((nextLocation): any => {
       if (hasChanged && nextLocation.pathname !== location.pathname) {
         setNextPath(nextLocation.pathname);
         setShowModal(true);
@@ -66,7 +67,8 @@ export const useNavigationBlocker = (hasChanged: boolean) => {
    * @param path - The path to navigate to.
    */
   const handleDirectNavigation = (path: string) => {
-    const unblock = history.block(() => true); // Unblock any previous navigation blockers
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const unblock = history.block((): any => true); // Unblock any previous navigation blockers
     history.push(path); // Navigate to the new path
     unblock(); // Immediately unblock to prevent blocking future navigation
     setNextPath(null);
