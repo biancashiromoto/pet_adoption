@@ -1,9 +1,17 @@
 import { useState } from "react";
 import { useNavigationBlocker } from "../../hooks/useNavigationBlocker";
 import { Modal } from "../../components/Modal";
+import Select from "../../components/Select";
 
 const PatientForm = () => {
   const [hasChanged, setHasChanged] = useState(false);
+  const species: string[] = [
+    "Canine",
+    "Feline",
+    "Bird",
+    "Rodent",
+    "Reptile"
+  ]
   const {
     showModal,
     setShowModal,
@@ -37,20 +45,12 @@ const PatientForm = () => {
             type='text'
           />
         </label>
-        <label htmlFor='patient__input--species'>
-          Species: 
-          <select
-            data-testid="patient__input--species"
-            onChange={() => setHasChanged(true)}
-            title="patient__input--species"
-          >
-            <option>Canine</option>
-            <option>Feline</option>
-            <option>Bird</option>
-            <option>Rodent</option>
-            <option>Reptile</option>
-          </select>
-        </label>
+        <Select
+          dataTestId="patient__select--species"
+          label="Species: "
+          title="patient__select--species"
+          options={species}
+        />
         <button
           type="button"
           onClick={(e) => {
