@@ -9,6 +9,7 @@ describe("Input component", () => {
         className="test"
         dataTestId="input"
         label="label"
+        name="name"
         onChange={vi.fn()}
         title="input"
         value=""
