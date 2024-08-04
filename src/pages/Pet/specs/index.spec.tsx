@@ -78,9 +78,9 @@ describe("Pet page", () => {
     act(() => fireEvent.change(getByTestId("patient__input--name"), { target: { value: "Francisco" } }));
     act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
     await waitFor(() => {
-      expect(queryByRole("heading", { name: /are you sure/i })).toBeInTheDocument();
+      expect(queryByRole("heading", { name: en.modal.leaveWithoutSaving.title })).toBeInTheDocument();
     });
-    act(() => fireEvent.click(getByRole("button", { name: /yes, leave/i })));
+    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.leave })));
     await waitFor(() => {
       expect(mockHistoryPush).toHaveBeenCalledWith("/");
     });
@@ -96,7 +96,7 @@ describe("Pet page", () => {
     act(() => fireEvent.change(getByTestId("patient__select--species"), { target: { value: /feline/i } }));
     act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
     await waitFor(() => {
-      expect(queryByRole("heading", { name: /are you sure/i })).toBeInTheDocument();
+      expect(queryByRole("heading", { name: en.modal.leaveWithoutSaving.title })).toBeInTheDocument();
     });
   });
 
@@ -110,9 +110,9 @@ describe("Pet page", () => {
     act(() => fireEvent.change(getByTestId("patient__select--species"), { target: { value: "feline" } }));
     act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
     await waitFor(() => {
-      expect(queryByRole("heading", { name: /are you sure/i })).toBeInTheDocument();
+      expect(queryByRole("heading", { name: en.modal.leaveWithoutSaving.title })).toBeInTheDocument();
     });
-    act(() => fireEvent.click(getByRole("button", { name: /cancel/i })));
+    act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.cancel })));
     expect(mockHistoryPush).not.toHaveBeenCalled();
   });
 });

@@ -78,7 +78,7 @@ describe("TutorForm page", () => {
     act(() => fireEvent.change(getByTestId("tutor__input--first-name"), { target: { value: "Francisco" } }));
     act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
     await waitFor(() => {
-      expect(queryByRole("heading", { name: /are you sure/i })).toBeInTheDocument();
+      expect(queryByRole("heading", { name: en.modal.leaveWithoutSaving.title })).toBeInTheDocument();
     });
     act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.leave })));
     await waitFor(() => {
@@ -96,7 +96,7 @@ describe("TutorForm page", () => {
     act(() => fireEvent.change(getByTestId("tutor__input--first-name"), { target: { value: /jon/i } }));
     act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
     await waitFor(() => {
-      expect(queryByRole("heading", { name: /are you sure/i })).toBeInTheDocument();
+      expect(queryByRole("heading", { name: en.modal.leaveWithoutSaving.title })).toBeInTheDocument();
     });
   });
 
@@ -110,7 +110,7 @@ describe("TutorForm page", () => {
     act(() => fireEvent.change(getByTestId("tutor__input--last-name"), { target: { value: /doe/i } }));
     act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.goBack })));
     await waitFor(() => {
-      expect(queryByRole("heading", { name: /are you sure/i })).toBeInTheDocument();
+      expect(queryByRole("heading", { name: en.modal.leaveWithoutSaving.title })).toBeInTheDocument();
     });
     act(() => fireEvent.click(getByRole("button", { name: en.buttonLabels.cancel })));
     expect(mockHistoryPush).not.toHaveBeenCalled();
